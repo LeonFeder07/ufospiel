@@ -39,24 +39,16 @@ public class Schrott
         }
         if(this.istGetroffen2()){
             this.explodiere();
-            System.out.println("WASDWASD");
-            trefferPunkte = 1;
+            //System.out.println("WASDWASD");
+            trefferPunkte = 2;
         }
         if(this.istGetroffen3()){
             this.explodiere();
-            trefferPunkte=-1;
+            trefferPunkte=-5;
         }
     }
 
-    public void zaehle(){
 
-        for(int i=0; i<=400;i++){
-            zeit=zeit+1;
-
-            System.out.println(zeit);
-            Sys.warte(1000);
-        }
-    }
 
     public boolean istGetroffen(){
         double a1=(komet.gibX() -angela.gibX()); 
@@ -73,7 +65,7 @@ public class Schrott
         double b=(komet.gibY() -scanner.gibY());
         double c=(komet.gibZ() -scanner.gibZ());
         double d=Math.sqrt(a*a+b*b+c*c);
-        if(d<=50){
+        if(d<=75){
             return true;
         }
         else{return false;}
@@ -83,7 +75,7 @@ public class Schrott
         double b=(komet.gibY() -laser.gibY());
         double c=(komet.gibZ() -laser.gibZ());
         double d=Math.sqrt(a*a+b*b+c*c);
-        if(d<=50){return true;
+        if(d<=60){return true;
         }
         else{return false;}
     }

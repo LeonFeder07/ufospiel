@@ -4,7 +4,7 @@ public class Komet
 {
     private GLKugel  komet,schrott,schrott1,schrott3,schrott2,schrott4;
    
-    double x,y,a,b,c,a1,b1,c1,punkte;
+
     int trefferPunkte = 0;
     Ufo angela;
     Laser laserstrahl;
@@ -46,25 +46,14 @@ public class Komet
             laserstrahl.setzePosition(20000,3212154,23131321);
         }
     }
-  public double gibPunkte(){
-     return punkte; 
-    }
-    public void zaehle(){
 
-        for(int i=0; i<=400;i++){
-            zeit=zeit+1;
-
-            System.out.println(zeit);
-            Sys.warte(1000);
-        }
-    }
 
     public boolean istGetroffen(){
         double a1=(komet.gibX() -angela.gibX()); 
         double b1=(komet.gibY() -angela.gibY());
         double c1=(komet.gibZ() -angela.gibZ());
         double d=Math.sqrt(a1*a1+b1*b1+c1*c1);
-        if(d<=50){
+        if(d<=65){
             return true;
         }else{return false;}
 
@@ -74,7 +63,7 @@ public class Komet
         double b=(komet.gibY() -laserstrahl.gibY());
         double c=(komet.gibZ() -laserstrahl.gibZ());
         double d=Math.sqrt(a*a+b*b+c*c);
-        if(d<=80){
+        if(d<=60){
             return true;
         }else{return false;}
 

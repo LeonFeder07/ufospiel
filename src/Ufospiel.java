@@ -4,7 +4,7 @@ public class Ufospiel{
     private GLLicht licht;
     private GLTastatur tastatur;
     private GLHimmel himmel;
-    private GLTafel tafel;
+    private GLTafel tafel,willkommmenstafel,willkommmenstafel1,willkommmenstafel2,willkommmenstafel3;
     private Ufo ufo;
     private Komet[]kometenhagel;
     private Laser laserstrahl;
@@ -15,20 +15,40 @@ public class Ufospiel{
 
     public Ufospiel(){
         kamera = new GLEntwicklerkamera(800,600);  
-        kamera.verschiebe(300,200,500);
-        kamera.rotiere(10,0,1,0,300,1000,1100);
+
+        //kamera.rotiere(10,0,1,0,300,1000,1100);
         licht  = new GLLicht();
         tastatur = new GLTastatur();
-        tafel = new GLTafel (200,400,-500,600,580);
+        tafel = new GLTafel (-650,550,-700,600,580);
         tafel.setzeAutodrehung(true);
         tafel.setzeTextur("src/img/img_1.png");
         tafel.setzeTextfarbe(1,1,1);
+        willkommmenstafel = new GLTafel (0,200,-1000,80,600);
+        willkommmenstafel.setzeTextur("src/img/img_1.png");
+        willkommmenstafel.setzeTextfarbe(1,1,1);
+        willkommmenstafel.setzeAutodrehung(true);
+
+        willkommmenstafel1 = new GLTafel (0,100,-1000,80,600);
+        willkommmenstafel1.setzeTextur("src/img/img_1.png");
+        willkommmenstafel1.setzeTextfarbe(1,1,1);
+        willkommmenstafel1.setzeAutodrehung(true);
+
+        willkommmenstafel2 = new GLTafel (0,0,-1000,80,600);
+        willkommmenstafel2.setzeTextur("src/img/img_1.png");
+        willkommmenstafel2.setzeTextfarbe(1,1,1);
+        willkommmenstafel2.setzeAutodrehung(true);
+
+        willkommmenstafel3 = new GLTafel (0,-100,-1000,80,600);
+        willkommmenstafel3.setzeTextur("src/img/img_1.png");
+        willkommmenstafel3.setzeTextfarbe(1,1,1);
+        willkommmenstafel3.setzeAutodrehung(true);
         himmel = new GLHimmel("src/img/Sterne.jpg");
         ufo = new Ufo();
+        kamera.setzePosition(ufo.gibX(),(ufo.gibY()+100),ufo.gibZ()+600);
         kometenhagel = new Komet [100];
         schrotthagel = new Schrott[30];
         lz=0;
-        laserstrahl = new Laser(ufo);
+        laserstrahl = new Laser();
         scanner = new Scanner(ufo,schrotthagel);
         
         for (int i=0; i<kometenhagel.length; i++){
@@ -43,7 +63,26 @@ public class Ufospiel{
 
     }
     public void run(){
-        while(!tastatur.esc()){ 
+        while(!tastatur.tab()) {
+            ufo.setzeSichtbarkeit(false);
+
+
+
+            willkommmenstafel.setzeText("Willkommen zu meinem Spiel!!!", 86);
+            willkommmenstafel1.setzeText("Schrott einsaugen mit Scanner + 1 Punkt (Enter)", 76);
+            willkommmenstafel2.setzeText("Komet zerstören mit Laser + 1 Punkt (Shift)", 76);
+            willkommmenstafel3.setzeText("Schrott zerstören mit Laser - 1 Punkt (Shift)", 76);
+
+        }
+        Sys.warte(500);
+        willkommmenstafel.setzeSichtbarkeit(false);
+        willkommmenstafel1.setzeSichtbarkeit(false);
+        willkommmenstafel2.setzeSichtbarkeit(false);
+        willkommmenstafel3.setzeSichtbarkeit(false);
+
+        ufo.setzeSichtbarkeit(true);
+
+        while(!tastatur.esc()){
             Sys.warte(10);
             scanner.setzeSichtbarkeit(false);
             if(tastatur.shift()){
@@ -70,21 +109,25 @@ public class Ufospiel{
 
            
             
-            if(ufo.gibX()>-600&& tastatur.links()){
+            if(ufo.gibX()>-700&& tastatur.links()){
                 ufo.bewegeLinks();
-
+                kamera.verschiebe(-1,0,0);
+                tafel.verschiebe(-1,0,0);
             }
-            if(ufo.gibY()<600&& tastatur.oben()){
+            if(ufo.gibY()<650&& tastatur.oben()){
                 ufo.bewegeOben();
-
+                kamera.verschiebe(0,1,0);
+                tafel.verschiebe(0,1,0);
             }
-            if(ufo.gibY()>-200&& tastatur.unten()){
+            if(ufo.gibY()>-250&& tastatur.unten()){
                 ufo.bewegeUnten();
-
+                kamera.verschiebe(0,-1,0);
+                tafel.verschiebe(0,-1,0);
             }
-            if(ufo.gibX()<650 &&tastatur.rechts()) {
+            if(ufo.gibX()<700 &&tastatur.rechts()) {
                 ufo.bewegeRechts();
-
+                kamera.verschiebe(1,0,0);
+                tafel.verschiebe(1,0,0);
             }
 
             for(int i=0; i<schrotthagel.length; i++){
@@ -97,7 +140,9 @@ public class Ufospiel{
             }
 
             tafel.setzeText("Punkte:"+punkte, 106);
-        }    
+
+        }
+
     }
 
 }

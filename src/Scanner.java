@@ -9,9 +9,7 @@ public class Scanner{
     Schrott[]schrott;
     double punkte1;
     public Scanner(Ufo pufo,Schrott[] pschrott){
-        //kamera = new GLEntwicklerkamera(800,600);  
-        //kamera.verschiebe(0,200,500);
-         //licht  = new GLLicht();
+
          angela = pufo;
          schrott = pschrott;
          double punkte1 = 0;
@@ -33,12 +31,7 @@ public class Scanner{
             
                 ring3.setzePosition(x,y,z-100);
     }
-    public double gibPunkte(){
-        return punkte1;
-    }
 
-
-   //}
     
     
     public void setzeSichtbarkeit(boolean eingabe){   

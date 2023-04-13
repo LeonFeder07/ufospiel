@@ -1,17 +1,14 @@
 import GLOOP.*;
 public class Ufo{
-   private GLLicht licht;
-    private GLEntwicklerkamera kamera;
+
+
     private GLTorus rumpf; 
     private GLKugel cockpit;
     private GLKegel fluegel1, fluegel2;
-    private GLQuader untertasse;
-    public  GLTastatur tastatur;
-    Komet scholz;
+
+
     public Ufo(){
-        //kamera = new GLEntwicklerkamera(800,600);  
-        //kamera.verschiebe(0,200,500);
-         //licht  = new GLLicht();
+
         cockpit = new GLKugel(0,0,100,40);
         cockpit.setzeFarbe(0,1,0);
         rumpf   = new GLTorus (0,0,100,40,10);
@@ -76,5 +73,11 @@ public class Ufo{
     }
     public double gibZ(){
      return cockpit.gibZ(); 
+    }
+    public void setzeSichtbarkeit(boolean eingabe){
+        cockpit.setzeSichtbarkeit(eingabe);
+        rumpf.setzeSichtbarkeit(eingabe);
+        fluegel1.setzeSichtbarkeit(eingabe);
+        fluegel2.setzeSichtbarkeit(eingabe);
     }
 }

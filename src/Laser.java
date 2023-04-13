@@ -3,14 +3,14 @@ import GLOOP.*;
 public class Laser
 {
     private GLQuader laserstrahl;
-    Ufo angela;
+    ;
     
 
-    double a,b,c,d;
-    public Laser(Ufo pufo){
+
+    public Laser(){
         
-        angela=pufo;
-        laserstrahl = new GLQuader(angela.gibX(),angela.gibY(),angela.gibZ(),20,20,60);   
+
+        laserstrahl = new GLQuader(2000,5000,23323,15,15,60);
         laserstrahl.setzeSichtbarkeit(false);
         laserstrahl.setzeFarbe(1,0,0);
     }
