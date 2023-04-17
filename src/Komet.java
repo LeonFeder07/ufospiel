@@ -17,7 +17,7 @@ public class Komet
         scanner = pscanner;
         schwierig=pschwierig;
 
-        komet = new GLKugel((Math.random()*-3000+1500),(Math.random()*-3000+1500),-1500,50);
+        komet = new GLKugel((Math.random()*-3000+1500),(Math.random()*-3000+1500),(Math.random()*-3000-1000),50);
         komet.setzeSkalierung (1,Math.random()+0.5,Math.random()+0.5);
         komet. setzeTextur ("src/img/Krater.jpg");
 

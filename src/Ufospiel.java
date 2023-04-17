@@ -160,11 +160,23 @@ public class Ufospiel{
             for(int i=0; i<schrotthagel.length; i++){
                 schrotthagel [i].falle();
                 punkte = punkte + schrotthagel[i].trefferPunkte;
+                if(schrotthagel[i].istGetroffen()){
+                    willkommmenstafel.setzeSichtbarkeit(true);
+                    willkommmenstafel.setzeText("GAMEOVER",106 );
+                    willkommmenstafel2.setzeSichtbarkeit(true);
+                    willkommmenstafel2.setzeText("Starten Sie das Spiel neu um es noch einmal zuversuchen",106 );
+
+                }
             }
             for(int i=0; i<kometenhagel.length; i++){
                 kometenhagel[i].falle();
                 punkte = punkte + kometenhagel[i].trefferPunkte;
-            }
+                if(kometenhagel[i].istGetroffen()){
+                    willkommmenstafel.setzeSichtbarkeit(true);
+                    willkommmenstafel.setzeText("GAMEOVER",106 );
+                    willkommmenstafel2.setzeSichtbarkeit(true);
+                    willkommmenstafel2.setzeText("Starten Sie das Spiel neu um es noch einmal zuversuchen",106 );
+            }}
 
             tafel.setzeText("Punkte:"+punkte, 106);
 
