@@ -4,7 +4,7 @@ public class Ufospiel{
     private GLLicht licht;
     private GLTastatur tastatur;
     private GLHimmel himmel;
-    private GLTafel tafel,willkommmenstafel,willkommmenstafel1,willkommmenstafel2,willkommmenstafel3;
+    private GLTafel tafel,tafel2,willkommmenstafel,willkommmenstafel1,willkommmenstafel2,willkommmenstafel3;
     private Ufo ufo;
     private Komet[]kometenhagel;
     private Laser laserstrahl;
@@ -12,6 +12,8 @@ public class Ufospiel{
     private Scanner scanner;
     int lz;
     int punkte = 0;
+    int schwierig=0;
+
 
     public Ufospiel(){
         kamera = new GLEntwicklerkamera(800,600);  
@@ -23,6 +25,10 @@ public class Ufospiel{
         tafel.setzeAutodrehung(true);
         tafel.setzeTextur("src/img/img_1.png");
         tafel.setzeTextfarbe(1,1,1);
+        tafel2 = new GLTafel (0,550,-700,600,580);
+        tafel2.setzeAutodrehung(true);
+        tafel2.setzeTextur("src/img/img_1.png");
+        tafel2.setzeTextfarbe(1,1,1);
         willkommmenstafel = new GLTafel (0,200,-1000,80,600);
         willkommmenstafel.setzeTextur("src/img/img_1.png");
         willkommmenstafel.setzeTextfarbe(1,1,1);
@@ -51,14 +57,8 @@ public class Ufospiel{
         laserstrahl = new Laser();
         scanner = new Scanner(ufo,schrotthagel);
         
-        for (int i=0; i<kometenhagel.length; i++){
-            kometenhagel[i] = new Komet(ufo,laserstrahl);
-            
-        } 
-        for (int i=0; i<schrotthagel.length; i++){
-            schrotthagel[i] = new Schrott(ufo,scanner, laserstrahl);
-            
-        } 
+
+
         run();                                         
 
     }
@@ -66,12 +66,39 @@ public class Ufospiel{
         while(!tastatur.tab()) {
             ufo.setzeSichtbarkeit(false);
 
-
-
+            if(schwierig==0) {
+                tafel2.setzeText("Wähle Schwierigkeit", 106);
+            }
             willkommmenstafel.setzeText("Willkommen zu meinem Spiel!!!", 86);
             willkommmenstafel1.setzeText("Schrott einsaugen mit Scanner + 1 Punkt (Enter)", 76);
             willkommmenstafel2.setzeText("Komet zerstören mit Laser + 1 Punkt (Shift)", 76);
             willkommmenstafel3.setzeText("Schrott zerstören mit Laser - 1 Punkt (Shift)", 76);
+        if(tastatur.unten()){
+            schwierig=8;
+        }
+        if(tastatur.enter()){
+                schwierig=1;
+            }
+            if(tastatur.oben()){
+                schwierig=5;
+            }
+            if(schwierig==5) {
+                tafel2.setzeText("Schwierigkeitsgrad Mittel", 106);
+            }
+            if(schwierig==1) {
+                tafel2.setzeText("Schwierigkeitsgrad Leicht", 106);
+            }
+            if(schwierig==8) {
+                tafel2.setzeText("Schwierigkeitsgrad Schwer", 106);
+            }
+        }
+
+        for (int i=0; i<kometenhagel.length; i++){
+            kometenhagel[i] = new Komet(ufo,laserstrahl, scanner,schwierig);
+
+        }
+        for (int i=0; i<schrotthagel.length; i++){
+            schrotthagel[i] = new Schrott(ufo,scanner, laserstrahl,schwierig);
 
         }
         Sys.warte(500);
@@ -79,7 +106,7 @@ public class Ufospiel{
         willkommmenstafel1.setzeSichtbarkeit(false);
         willkommmenstafel2.setzeSichtbarkeit(false);
         willkommmenstafel3.setzeSichtbarkeit(false);
-
+        tafel2.setzeSichtbarkeit(false);
         ufo.setzeSichtbarkeit(true);
 
         while(!tastatur.esc()){

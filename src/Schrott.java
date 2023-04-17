@@ -9,12 +9,13 @@ public class Schrott
     Scanner scanner;
     int trefferPunkte = 0;
     Laser laser;
-    int zeit;
-    public Schrott(Ufo pUfo,Scanner pscanner,Laser plaser){
+    int zeit, schwierig;
+    public Schrott(Ufo pUfo,Scanner pscanner,Laser plaser,int pschwierig){
         
         angela=pUfo;
         scanner=pscanner;
         laser = plaser;
+        schwierig = pschwierig;
         komet = new GLKugel((Math.random()*-3000+1500),(Math.random()*-3000+1500),-1500,50);
         komet.setzeSkalierung (1,Math.random()+0.5,Math.random()+0.5);
         komet. setzeTextur ("src/img/schrott.jpg");
@@ -24,7 +25,7 @@ public class Schrott
     public void falle(){
         trefferPunkte = 0;
         if(komet.gibZ()<=850){
-            komet.verschiebe(0,0,(Math.random()*10));  
+            komet.verschiebe(0,0,(Math.random()*10)+schwierig);
             komet.drehe(Math.random(),Math.random(),Math.random());
 
         }else{

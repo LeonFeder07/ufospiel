@@ -8,16 +8,19 @@ public class Komet
     int trefferPunkte = 0;
     Ufo angela;
     Laser laserstrahl;
-    int zeit;
-    public Komet(Ufo pUfo, Laser plaser){
+    Scanner scanner;
+    int zeit,schwierig;
+    public Komet(Ufo pUfo, Laser plaser, Scanner pscanner,int pschwierig){
         
         angela=pUfo;
         laserstrahl=plaser;
-        //laserstrahl = new Laser(pUfo);
+        scanner = pscanner;
+        schwierig=pschwierig;
+
         komet = new GLKugel((Math.random()*-3000+1500),(Math.random()*-3000+1500),-1500,50);
         komet.setzeSkalierung (1,Math.random()+0.5,Math.random()+0.5);
         komet. setzeTextur ("src/img/Krater.jpg");
-        double punkte = 0;
+
         
         zeit=0;
     }
@@ -25,7 +28,7 @@ public class Komet
     public void falle(){
         trefferPunkte = 0;
         if(komet.gibZ()<=850){
-            komet.verschiebe(0,0,(Math.random()*10));  
+            komet.verschiebe(0,0,(Math.random()*10+schwierig));
             komet.drehe(Math.random(),Math.random(),Math.random());
 
         }else{
@@ -35,6 +38,7 @@ public class Komet
         if(this.istGetroffen()){
             komet.setzeSichtbarkeit(false);
             laserstrahl.setzeSichtbarkeit(false);
+            scanner .setzeSichtbarkeit(false);
             komet.setzePosition((Math.random()*-3000+1500),(Math.random()*-3000+1500),-1500);
             angela.explodiere();
          komet.setzeSichtbarkeit(true);
