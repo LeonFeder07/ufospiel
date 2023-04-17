@@ -33,4 +33,7 @@ public class Laser
     public double gibZ(){
         return laserstrahl.gibZ(); 
     }
+    public void setzeSichtbarkeit(boolean eingabe) {
+        laserstrahl.setzeSichtbarkeit(eingabe);
+    }
 }

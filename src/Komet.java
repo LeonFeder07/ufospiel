@@ -34,6 +34,7 @@ public class Komet
         }
         if(this.istGetroffen()){
             komet.setzeSichtbarkeit(false);
+            laserstrahl.setzeSichtbarkeit(false);
             komet.setzePosition((Math.random()*-3000+1500),(Math.random()*-3000+1500),-1500);
             angela.explodiere();
          komet.setzeSichtbarkeit(true);
